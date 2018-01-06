@@ -63,12 +63,14 @@ ylabel('Pressure (Pa)');
 %For f0=10MHz and sigma=50ns
 s = conv(pressure, Gauss_press);
 
-tp = -4*sigma: dt :4*sigma;
-t = linspace(0,3e-6,341);
+t = linspace(0,3e-6,341); %redefined for plots
 
 %PLOT FOR f0=10MHz AND sigma=50ns -----------------------------------------
 figure(3);
+%figure('Name', 'Field for f0=10MHz and sigma = 50ns');
+subplot(2,1,1)
 plot(t,s);
+axis([0.5e-6, 1.5e-6, -50, 50]);
 title('Convoluted signal s(t) for f0=10MHz and sigma=50ns');
 xlabel('Time (s)');
 ylabel('Pressure (Pa)');
@@ -77,16 +79,14 @@ ylabel('Pressure (Pa)');
 S = fft(s);
 
 %Convert time domain into frequency domain
+f=zeros(length(t));
 for i = 1:length(t)
     f(i)=1/t(i);
 end
 
-f(1:10)
-size(f);
-
-figure(4);
-%plot(f,abs(S))
-%axis([0, 1e6,0,400]);
+subplot(2,1,2);
+plot(f,abs(S))
+axis([0, 1e7,0,400]);
 title('Amplitude Spectrum S(f) in the Frequency Domain');
 xlabel('Frequency (Hz)');
 ylabel('S(f) - FFT of convoluted signal s(t)');
@@ -141,16 +141,19 @@ t = linspace(0,3e-6,421);
 figure(6);
 subplot(3,1,1);
 plot(t(1:341),s1)
+axis([0.5e-6, 1.5e-6, -100, 100]);
 title('f0 = 20MHz and sigma = 50ns');
 xlabel('time (s)');
 ylabel('s(t)');
 subplot(3,1,2);
 plot(t(1:381),s2)
+axis([0.5e-6, 1.5e-6, -100, 100]);
 title('f0 = 20MHz and sigma = 100ns');
 xlabel('time (s)');
 ylabel('s(t)');
 subplot(3,1,3);
 plot(t(1:421), s3)
+axis([0.5e-6, 1.5e-6, -100, 100]);
 title('f0 = 20MHz and sigma = 150ns');
 xlabel('time (s)');
 ylabel('s(t)');
@@ -159,16 +162,19 @@ ylabel('s(t)');
 figure(7);
 subplot(3,1,1);
 plot(t(1:341),s4)
+axis([0.5e-6, 1.5e-6, -100, 100]);
 title('f0 = 30MHz and sigma = 50ns');
 xlabel('time (s)');
 ylabel('s(t)');
 subplot(3,1,2);
 plot(t(1:381),s5)
+axis([0.5e-6, 1.5e-6, -100, 100]);
 title('f0 = 30MHz and sigma = 100ns');
 xlabel('time (s)');
 ylabel('s(t)');
 subplot(3,1,3);
 plot(t(1:421), s6)
+axis([0.5e-6, 1.5e-6, -100, 100]);
 title('f0 = 30MHz and sigma = 150ns');
 xlabel('time (s)');
 ylabel('s(t)');
@@ -190,16 +196,19 @@ end
 figure(8);
 subplot(3,1,1);
 plot(f(1:341),abs(S1))
+axis([0, 3e6,0,1200]);
 title('f0 = 20MHz and sigma = 50ns');
 xlabel('time (s)');
 ylabel('s(t)');
 subplot(3,1,2);
 plot(f(1:381),abs(S2))
+axis([0, 3e6,0,1200]);
 title('f0 = 20MHz and sigma = 100ns');
 xlabel('time (s)');
 ylabel('s(t)');
 subplot(3,1,3);
 plot(f(1:421), abs(S3))
+axis([0, 3e6,0,1200]);
 title('f0 = 20MHz and sigma = 150ns');
 xlabel('time (s)');
 ylabel('s(t)');
@@ -208,16 +217,19 @@ ylabel('s(t)');
 figure(9);
 subplot(3,1,1);
 plot(f(1:341),abs(S4))
+axis([0, 3e6,0,1200]);
 title('f0 = 30MHz and sigma = 50ns');
 xlabel('time (s)');
 ylabel('s(t)');
 subplot(3,1,2);
 plot(f(1:381),abs(S5))
+axis([0, 3e6,0,1200]);
 title('f0 = 30MHz and sigma = 100ns');
 xlabel('time (s)');
 ylabel('s(t)');
 subplot(3,1,3);
 plot(f(1:421), abs(S6))
+axis([0, 3e6,0,1200]);
 title('f0 = 30MHz and sigma = 150ns');
 xlabel('time (s)');
 ylabel('s(t)');
